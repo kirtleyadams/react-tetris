@@ -1,6 +1,6 @@
 const Display = ({ gameOver, text }) => (
     <div>
-        {text}
+        { text }
     </div>
 )
 
