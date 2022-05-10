@@ -11,22 +11,22 @@ export const usePlayer = () => {
   });
 
   const rotate = (matrix, dir) => {
-    const rotateTetro = matrix.map((_, index) => 
-      matrix.map(col => col[index] )
+    const rotateTetro = matrix.map((_, index) =>
+      matrix.map(col => col[index]),
     );
-    if (dir > 0) return rotateTetro.map(row=> row.reverse());
-    return rotateTetro();
+    if (dir > 0) return rotateTetro.map(row => row.reverse());
+    return rotateTetro().reverse();
   };
 
   const playerRotate = (stage, dir) => {
     const clonedPlayer = JSON.parse(JSON.stringify(player));
-    clonedPlayer.tetromino = rotate (clonedPlayer.tetromino, dir);
+    clonedPlayer.tetromino = rotate(clonedPlayer.tetromino, dir);
 
     const pos = clonedPlayer.pos.x;
     let offset = 1;
-    while (checkCollision(clonedPlayer, stage, { x:0, y: 0})) {
-      clonedPlayer.pos.x +=offset;
-      offset = -(offset + offset > 0 ? 1: -1);
+    while (checkCollision(clonedPlayer, stage, { x: 0, y: 0 })) {
+      clonedPlayer.pos.x += offset;
+      offset = -(offset + (offset > 0 ? 1 : -1));
       if (offset > clonedPlayer.tetromino[0].length) {
         rotate(clonedPlayer.tetromino, -dir);
         clonedPlayer.pos.x = pos;
